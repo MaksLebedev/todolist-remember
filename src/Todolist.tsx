@@ -7,6 +7,7 @@ type PropsType = {
   deleteTechnologies: (id: string) => void;
   addTechnologies: (titleInput: string) => void;
   filterTechnologies: (nameButton: FilterTechnologies) => void;
+  filter: string;
 };
 
 export const Todolist = ({
@@ -15,6 +16,7 @@ export const Todolist = ({
   deleteTechnologies,
   addTechnologies,
   filterTechnologies,
+  filter,
 }: PropsType) => {
   const [titleInput, setTitleInput] = useState("");
 
@@ -44,9 +46,22 @@ export const Todolist = ({
         ))}
       </ul>
       <div>
-        <button onClick={() => filterTechnologies("all")}>All</button>
-        <button onClick={() => filterTechnologies("active")}>Active</button>
-        <button onClick={() => filterTechnologies("completed")}>
+        <button
+          className={filter === "all" ? "active-btn" : ""}
+          onClick={() => filterTechnologies("all")}
+        >
+          All
+        </button>
+        <button
+          className={filter === "active" ? "active-btn" : ""}
+          onClick={() => filterTechnologies("active")}
+        >
+          Active
+        </button>
+        <button
+          className={filter === "completed" ? "active-btn" : ""}
+          onClick={() => filterTechnologies("completed")}
+        >
           Completed
         </button>
       </div>

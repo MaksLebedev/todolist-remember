@@ -35,18 +35,18 @@ function App() {
     setTechnologies([...technologies, newTechnologies]);
   };
 
-  const filterTechnologies = (filter: FilterTechnologies) => {
-    setFilter(filter);
+  const filterTechnologies = (value: FilterTechnologies) => {
+    setFilter(value);
   };
+
   let filteredTechnologies = technologies;
 
-  filteredTechnologies = technologies.filter((item) =>
-    item.isDone
-      ? filter === "completed"
-      : item.isDone
-      ? filter === "active"
-      : filter === "all"
-  );
+  if (filter === "active") {
+    filteredTechnologies = technologies.filter((el) => !el.isDone);
+  }
+  if (filter === "completed") {
+    filteredTechnologies = technologies.filter((el) => el.isDone);
+  }
 
   return (
     <div className="App">
@@ -56,6 +56,7 @@ function App() {
         deleteTechnologies={deleteTechnologies}
         addTechnologies={addTechnologies}
         filterTechnologies={filterTechnologies}
+        filter={filter}
       />
     </div>
   );
