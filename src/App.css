@@ -15,9 +15,14 @@
 }
 
 .active-btn {
-  background-color: coral;
+  background-color: #008B8B;
   font-weight: bold;
   color: white;
-  border: 1px solid darkgrey;
-  border-radius: 3px;
+  border: 2px solid grey;
+  border-radius: 2px;
+}
+
+.active-task {
+  opacity: 0.5;
+  text-decoration: line-through;
 }

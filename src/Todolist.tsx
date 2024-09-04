@@ -8,6 +8,7 @@ type PropsType = {
   addTechnologies: (titleInput: string) => void;
   filterTechnologies: (nameButton: FilterTechnologies) => void;
   filter: string;
+  changeStatusTechnologies: (id: string, newStatus: boolean) => void;
 };
 
 export const Todolist = ({
@@ -17,6 +18,7 @@ export const Todolist = ({
   addTechnologies,
   filterTechnologies,
   filter,
+  changeStatusTechnologies,
 }: PropsType) => {
   const [titleInput, setTitleInput] = useState("");
 
@@ -29,6 +31,17 @@ export const Todolist = ({
     setTitleInput("");
   };
 
+  const changeStatusTechnologiesHandler = (
+    id: string,
+    e: ChangeEvent<HTMLInputElement>
+  ) => {
+    changeStatusTechnologies(id, e.currentTarget.checked);
+  };
+
+  const deleteTechnologiesHandler = (id: string) => {
+    deleteTechnologies(id);
+  };
+
   return (
     <div className="todolist">
       <h3>{title}</h3>
@@ -39,9 +52,17 @@ export const Todolist = ({
       <ul>
         {technologies.map((task) => (
           <li key={task.id}>
-            <input type="checkbox" checked={task.isDone} />
-            <span>{task.title}</span>
-            <button onClick={() => deleteTechnologies(task.id)}>x</button>
+            <input
+              onChange={(e) => changeStatusTechnologiesHandler(task.id, e)}
+              type="checkbox"
+              checked={task.isDone}
+            />
+            <span className={task.isDone ? "active-task" : ""}>
+              {task.title}
+            </span>
+            <button onClick={() => deleteTechnologiesHandler(task.id)}>
+              x
+            </button>
           </li>
         ))}
       </ul>

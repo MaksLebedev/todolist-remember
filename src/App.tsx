@@ -48,6 +48,13 @@ function App() {
     filteredTechnologies = technologies.filter((el) => el.isDone);
   }
 
+  const changeStatusTechnologies = (id: string, newStatus: boolean) => {
+    const newStatusTechnologies = technologies.map((el) =>
+      el.id === id ? { ...el, isDone: newStatus } : el
+    );
+    setTechnologies(newStatusTechnologies);
+  };
+
   return (
     <div className="App">
       <Todolist
@@ -57,6 +64,7 @@ function App() {
         addTechnologies={addTechnologies}
         filterTechnologies={filterTechnologies}
         filter={filter}
+        changeStatusTechnologies={changeStatusTechnologies}
       />
     </div>
   );
